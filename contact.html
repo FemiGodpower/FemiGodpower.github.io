@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact – Godpower Creation</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <nav>
+    <a href="index.html#about">About Me</a>
+    <a href="index.html">Home</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <main>
+    <h1>Contact Me</h1>
+    <p class="email">Email: <a href="mailto:femigodpower@gmail.com">femigodpower@gmail.com</a></p>
+    <form action="https://formspree.io/f/xwpbeozy" method="POST">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
+      <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+
+      <input type="hidden" name="_next" value="index.html"/>
+
+      <div class="form-buttons">
+        <button type="reset">Reset</button>
+        <button type="submit">Send Message</button>
+      </div>
+    </form>
+  </main>
+</body>
+</html>

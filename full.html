@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Godpower Creation</title>
+  <style>
+    :root {
+      --accent: #7ecbff;
+      --bg: #f8f8f8;
+      --text: #111;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      overflow: hidden;
+    }
+
+    nav {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 30px;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 10px 20px;
+      border-radius: 30px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      font-size: 1rem;
+      z-index: 999;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    .canvas {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .center-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 3.5rem;
+      font-weight: bold;
+      display: flex;
+      gap: 6px;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .center-text span {
+      display: inline-block;
+      animation: letterBounce 1.8s ease-in-out infinite;
+    }
+
+    @keyframes letterBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); color: var(--accent); }
+    }
+
+    .card {
+      position: absolute;
+      width: 220px;
+      background: white;
+      border: 1px solid #ccc;
+      box-shadow: 0 0 10px rgba(0,0,0,0.08);
+      border-radius: 10px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+      overflow: hidden;
+      z-index: 0;
+      animation: gentleFloat 8s ease-in-out infinite;
+    }
+
+    @keyframes gentleFloat {
+      0%   { transform: translateY(0px); }
+      25%  { transform: translateY(-6px); }
+      50%  { transform: translateY(4px); }
+      75%  { transform: translateY(-4px); }
+      100% { transform: translateY(0px); }
+    }
+
+    .card.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      border-color: var(--accent);
+    }
+
+    .card figure {
+      height: 120px;
+      background: #d0ecff;
+    }
+
+    .card-content {
+      padding: 15px;
+    }
+
+    .card-content h3 {
+      margin-bottom: 8px;
+    }
+
+    .card-content p {
+      font-size: 0.9rem;
+      margin-bottom: 6px;
+    }
+
+    .card-content small {
+      font-size: 0.8rem;
+      color: gray;
+    }
+
+    .card-content a {
+      display: inline-block;
+      margin-top: 10px;
+      background: var(--accent);
+      color: white;
+      padding: 6px 12px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .card-content a:hover {
+      background-color: #5ab7ea;
+      transform: scale(1.05);
+    }
+
+    .filter-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 12px 14px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+      transition: transform 0.2s ease, background-color 0.3s ease;
+    }
+
+    .filter-button:hover {
+      background-color: #5ab7ea;
+      transform: scale(1.1);
+    }
+
+    .filters-panel {
+      position: fixed;
+      bottom: 70px;
+      right: 20px;
+      background: white;
+      padding: 10px 14px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+      display: none;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 999;
+    }
+
+    .filters-panel label {
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .filters-panel input[type="checkbox"] {
+      accent-color: var(--accent);
+      transform: scale(1.2);
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="#about">About Me</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <div class="canvas" id="canvas">
+    <div class="center-text" id="animatedText"></div>
+  </div>
+
+  <button class="filter-button" id="filterToggle">🔍</button>
+  <div class="filters-panel" id="filtersPanel">
+    <label><input type="checkbox" value="Website" /> Website</label>
+    <label><input type="checkbox" value="Design" /> Design</label>
+    <label><input type="checkbox" value="App" /> App</label>
+  </div>
+
+  <script>
+    const text = 'Godpower Creation';
+    const container = document.getElementById('animatedText');
+    text.split('').forEach((char, index) => {
+      const span = document.createElement('span');
+      span.textContent = char === ' ' ? '\u00A0' : char;
+      span.style.animationDelay = `${index * 0.1}s`;
+      container.appendChild(span);
+    });
+
+    const sampleProjects = [
+      { title: "Creative Portfolio", description: "Design and branding work.", date: "January, 2024", link: "#", tags: ["Design", "Website"] },
+      { title: "E-Commerce UI", description: "Modern shopping UI.", date: "March, 2024", link: "#", tags: ["Website"] },
+      { title: "Mobile App", description: "Cross-platform mobile design.", date: "Feb, 2025", link: "#", tags: ["App"] },
+      { title: "Landing Page", description: "A conversion landing page.", date: "May, 2025", link: "#", tags: ["Website"] },
+      { title: "Conceptual UI", description: "Experimental app concept.", date: "June, 2025", link: "#", tags: ["App", "Design"] }
+    ];
+
+    const projects = Array.from({ length: 2 }, (_, i) => {
+      const base = sampleProjects[i % sampleProjects.length];
+      return {
+        ...base,
+        title: `${base.title} #${i + 1}`
+      };
+    });
+
+    const canvas = document.getElementById('canvas');
+    const canvasWidth = window.innerWidth;
+    const canvasHeight = window.innerHeight;
+    const cardWidth = 220;
+    const cardHeight = 240;
+    const padding = 10;
+    const centerZone = {
+      left: canvasWidth / 2 - 300,
+      right: canvasWidth / 2 + 300,
+      top: canvasHeight / 2 - 100,
+      bottom: canvasHeight / 2 + 100
+    };
+    const placedRects = [centerZone];
+
+    function overlaps(rect) {
+      return placedRects.some(r =>
+        rect.left < r.right && rect.right > r.left &&
+        rect.top < r.bottom && rect.bottom > r.top
+      );
+    }
+
+    function getSafeRandomPosition() {
+      let tries = 0, top, left, rect;
+      do {
+        top = Math.random() * (canvasHeight - cardHeight - padding);
+        left = Math.random() * (canvasWidth - cardWidth - padding);
+        rect = { top, left, right: left + cardWidth + padding, bottom: top + cardHeight + padding };
+        tries++;
+        if (tries > 100) break;
+      } while (overlaps(rect));
+      placedRects.push(rect);
+      return { top, left };
+    }
+
+    projects.forEach(project => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.setAttribute('data-tags', project.tags.join(','));
+
+      const { top, left } = getSafeRandomPosition();
+      card.style.top = `${top}px`;
+      card.style.left = `${left}px`;
+      card.style.animationDelay = `${Math.random() * 5}s`;
+
+      card.innerHTML = `
+        <figure></figure>
+        <div class="card-content">
+          <h3>${project.title}</h3>
+          <p>${project.description}</p>
+          <small>${project.date}</small><br/>
+          <a href="${project.link}" target="_blank">Visit Site</a>
+        </div>
+      `;
+      canvas.appendChild(card);
+    });
+
+    const toggleBtn = document.getElementById('filterToggle');
+    const filtersPanel = document.getElementById('filtersPanel');
+    toggleBtn.addEventListener('click', () => {
+      filtersPanel.style.display = filtersPanel.style.display === 'flex' ? 'none' : 'flex';
+    });
+
+    const checkboxes = filtersPanel.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(box => box.addEventListener('change', applyFilters));
+
+    function applyFilters() {
+      const selected = Array.from(checkboxes).filter(b => b.checked).map(b => b.value);
+      document.querySelectorAll('.card').forEach(card => {
+        const tags = card.dataset.tags.split(',');
+        const match = selected.length === 0 || selected.some(tag => tags.includes(tag));
+        if (match) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    }
+  </script>
+</body>
+</html>
