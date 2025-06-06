@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const CARD_COUNT = 20;
+  const CARD_COUNT = 2;
 
   const sections = document.querySelectorAll(".page-section");
   const navLinks = document.querySelectorAll("nav a");
