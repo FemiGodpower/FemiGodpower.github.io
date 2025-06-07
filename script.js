@@ -33,8 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
 
   function createCards() {
-    // Animate both desktop and mobile titles
-    const text = "Godpower Creation";
+    const text = "Godpower Creations";
     desktopText.innerHTML = "";
     mobileText.innerHTML = "";
     text.split("").forEach((char, index) => {
@@ -46,7 +45,6 @@ document.addEventListener("DOMContentLoaded", () => {
       mobileText.appendChild(span2);
     });
 
-    // Clear previous cards
     canvas.querySelectorAll(".card").forEach((c) => c.remove());
 
     const canvasWidth = window.innerWidth;
@@ -116,7 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
       canvas.appendChild(card);
     }
 
-    makeCardsDraggable(); // Enable dragging
+    makeCardsDraggable();
   }
 
   function makeCardsDraggable() {
@@ -181,7 +179,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 100);
   }
 
-  // Desktop nav
   navLinks.forEach((link) => {
     link.addEventListener("click", (e) => {
       e.preventDefault();
@@ -197,7 +194,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Mobile nav
   mobileLinks.forEach((link) => {
     link.addEventListener("click", (e) => {
       e.preventDefault();
@@ -208,7 +204,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Hamburger toggle
   hamburger.addEventListener("click", () => {
     overlay.classList.toggle("hidden");
     hamburger.classList.toggle("active");
@@ -227,7 +222,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Filter bar hover
   let closeTimeout;
 
   function expandBar() {
@@ -244,7 +238,6 @@ document.addEventListener("DOMContentLoaded", () => {
   toggleBtn.addEventListener("mouseenter", expandBar);
   toggleBtn.addEventListener("mouseleave", collapseBar);
 
-  // Filtering cards
   const checkboxes = filtersPanel.querySelectorAll('input[type="checkbox"]');
   checkboxes.forEach((box) =>
     box.addEventListener("change", () => {
@@ -261,4 +254,18 @@ document.addEventListener("DOMContentLoaded", () => {
   );
 
   createCards(); // Initial load
+
+  // === Slide-up footer on hover ===
+  const footer = document.getElementById("slideFooter");
+
+  window.addEventListener("mousemove", (e) => {
+    const viewportHeight = window.innerHeight;
+    const mouseY = e.clientY;
+
+    if (mouseY > viewportHeight * 0.85) {
+      footer.classList.add("visible");
+    } else {
+      footer.classList.remove("visible");
+    }
+  });
 });
