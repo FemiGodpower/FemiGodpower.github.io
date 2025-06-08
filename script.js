@@ -1,18 +1,22 @@
 document.addEventListener("DOMContentLoaded", () => {
   const CARD_COUNT = 2;
 
+  // === Element References ===
   const sections = document.querySelectorAll(".page-section");
   const navLinks = document.querySelectorAll("nav a");
+  const mobileLinks = document.querySelectorAll(".mobile-menu a");
+  const checkboxes = document.querySelectorAll('#filtersPanel input[type="checkbox"]');
+
   const canvas = document.getElementById("canvas");
   const filtersPanel = document.getElementById("filtersPanel");
   const toggleBtn = document.getElementById("filterToggle");
   const hamburger = document.getElementById("hamburger");
   const overlay = document.getElementById("mobileMenuOverlay");
-  const mobileLinks = document.querySelectorAll(".mobile-menu a");
-
   const desktopText = document.getElementById("desktopAnimatedText");
   const mobileText = document.getElementById("mobileAnimatedText");
+  const footer = document.getElementById("slideFooter");
 
+  // === Project Card Data ===
   const projects = [
     {
       title: "My Portfolio",
@@ -32,6 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
     },
   ];
 
+  // === Card Creation & Layout ===
   function createCards() {
     const text = "Godpower Creations";
     desktopText.innerHTML = "";
@@ -117,6 +122,7 @@ document.addEventListener("DOMContentLoaded", () => {
     makeCardsDraggable();
   }
 
+  // === Drag-to-Move Cards ===
   function makeCardsDraggable() {
     const cards = document.querySelectorAll(".card");
 
@@ -149,6 +155,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // === Reset Mobile Menu State ===
   function resetHamburgerMenu() {
     hamburger.classList.remove("active");
     overlay.classList.add("hidden");
@@ -160,6 +167,7 @@ document.addEventListener("DOMContentLoaded", () => {
     icon.style.color = "#fff";
   }
 
+  // === Section Navigation ===
   function switchSection(target) {
     const current = document.querySelector(".page-section.visible");
     const newSection = document.getElementById(target);
@@ -174,11 +182,11 @@ document.addEventListener("DOMContentLoaded", () => {
       if (desktopLink) desktopLink.classList.add("active");
 
       if (target === "home") createCards();
-
       resetHamburgerMenu();
     }, 100);
   }
 
+  // === Desktop Navigation Events ===
   navLinks.forEach((link) => {
     link.addEventListener("click", (e) => {
       e.preventDefault();
@@ -194,6 +202,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // === Mobile Navigation Events ===
   mobileLinks.forEach((link) => {
     link.addEventListener("click", (e) => {
       e.preventDefault();
@@ -204,6 +213,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // === Hamburger Toggle ===
   hamburger.addEventListener("click", () => {
     overlay.classList.toggle("hidden");
     hamburger.classList.toggle("active");
@@ -222,6 +232,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // === Filter Button Hover Events ===
   let closeTimeout;
 
   function expandBar() {
@@ -238,7 +249,7 @@ document.addEventListener("DOMContentLoaded", () => {
   toggleBtn.addEventListener("mouseenter", expandBar);
   toggleBtn.addEventListener("mouseleave", collapseBar);
 
-  const checkboxes = filtersPanel.querySelectorAll('input[type="checkbox"]');
+  // === Card Filtering ===
   checkboxes.forEach((box) =>
     box.addEventListener("change", () => {
       const selected = Array.from(checkboxes)
@@ -246,19 +257,19 @@ document.addEventListener("DOMContentLoaded", () => {
         .map((b) => b.value);
       document.querySelectorAll(".card").forEach((card) => {
         const tags = card.dataset.tags.split(",");
-        const match =
-          selected.length === 0 || selected.some((tag) => tags.includes(tag));
+        const match = selected.length === 0 || selected.some((tag) => tags.includes(tag));
         card.classList.toggle("hidden", !match);
       });
     })
   );
 
-  createCards(); // Initial load
+  createCards(); // === Initial Load ===
 
-  // === Slide-up footer on hover ===
-  const footer = document.getElementById("slideFooter");
-
+  // === Desktop Footer Reveal on Hover ===
   window.addEventListener("mousemove", (e) => {
+    const isMobile = window.innerWidth <= 768;
+    if (isMobile) return;
+
     const viewportHeight = window.innerHeight;
     const mouseY = e.clientY;
 
@@ -266,6 +277,27 @@ document.addEventListener("DOMContentLoaded", () => {
       footer.classList.add("visible");
     } else {
       footer.classList.remove("visible");
+    }
+  });
+
+  // === Scroll-Based Logic for Mobile ===
+  window.addEventListener("scroll", () => {
+    const isMobile = window.innerWidth <= 768;
+    const atBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 10;
+
+    // === Footer Reveal on Mobile Scroll to Bottom ===
+    if (isMobile && atBottom) {
+      footer.classList.add("visible");
+    } else if (isMobile) {
+      footer.classList.remove("visible");
+    }
+
+    // === Title Fade-Out on Scroll Down (Mobile Only) ===
+    const scrollThreshold = 50;
+    if (isMobile && window.scrollY > scrollThreshold) {
+      mobileText.classList.add("fade-out");
+    } else if (isMobile) {
+      mobileText.classList.remove("fade-out");
     }
   });
 });

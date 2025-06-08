@@ -25,7 +25,7 @@ body {
   font-family: "Roboto", sans-serif;
   background-color: var(--bg);
   color: var(--text);
-  overflow: hidden;
+  overflow: hidden; /* default: desktop mode has no scroll */
 }
 
 nav {
@@ -57,7 +57,7 @@ nav a:hover {
 
 .canvas {
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   position: relative;
   overflow: hidden;
 }
@@ -507,33 +507,33 @@ nav a.fading {
 
 .slide-footer {
   position: fixed;
-  bottom: -15vh; /* hidden by default */
   left: 0;
+  bottom: 0;
   width: 100%;
-  height: 15vh;
   background-color: var(--color_3);
   color: var(--bg);
   display: flex;
   align-items: center;
   justify-content: space-between;
   font-size: 1.2rem;
-  transition: bottom 0.4s ease-in-out;
   z-index: 999;
-  padding: 0 1rem;
+  padding: 1rem;
+  flex-wrap: wrap;
 
-
+  transform: translateY(100%); /* ⛔ Hidden by default */
+  transition: transform 0.4s ease-in-out;
 }
 
 .slide-footer.visible {
-  bottom: 0;
+  transform: translateY(0); /* ✅ Slide up into view */
 }
 
-.footer-links-container{
+.footer-links-container {
   font-size: 1rem;
   text-align: right;
 }
 
-.footer-link{
+.footer-link {
   color: var(--bg);
   text-decoration: none;
   /* margin: 0 0.5rem; */
@@ -545,7 +545,7 @@ nav a.fading {
   color: var(--accent);
 }
 
-.footer-rights{
+.footer-rights {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -558,10 +558,10 @@ nav a.fading {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: .5rem;
+  gap: 0.5rem;
 }
 
-.footer-mailto{
+.footer-mailto {
   color: var(--bg);
   text-decoration: none;
   transition: color 0.3s ease;
@@ -576,16 +576,12 @@ nav a.fading {
   color: var(--accent);
 }
 
-
-
-
-.logo{
+.logo {
   width: 6rem;
 }
-.logo svg{
+.logo svg {
   fill: var(--bg);
 }
-
 
 @media (max-width: 1440px) {
   .background_logo {
@@ -600,12 +596,18 @@ nav a.fading {
 }
 
 @media (max-width: 768px) {
+  html,
+  body {
+    overflow: scroll;
+  }
   nav {
     display: none;
   }
 
   .canvas {
-    padding-top: 10rem;
+    padding: 10rem 0 5rem 0;
+    overflow: visible;
+
   }
 
   .mobile-title {
@@ -638,6 +640,7 @@ nav a.fading {
     justify-content: flex-start;
     flex-wrap: nowrap;
     pointer-events: none;
+    transition: opacity 0.5s ease-out;
   }
 
   .center-text span {
@@ -711,5 +714,36 @@ nav a.fading {
 
   .background_logo {
     margin-top: -5rem;
+  }
+
+  .slide-footer {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 1rem;
+    padding: 2rem 1rem;
+    height: auto;
+    transform: translateY(0);
+    position: static;
+  }
+
+  .footer-contact,
+  .footer-rights {
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-links-container {
+    text-align: center;
+  }
+
+  .logo {
+    margin-bottom: 1rem;
+  }
+
+  .fade-out {
+    opacity: 0;
+    transition: opacity 0.5s ease-out;
   }
 }
