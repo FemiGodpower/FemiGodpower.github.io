@@ -593,6 +593,33 @@ nav a.fading {
   .background_logo {
     margin-top: 15rem;
   }
+  @media (max-width: 1000px) {
+    /* Disable card hover effects */
+    .card:hover {
+      transform: none !important;
+      box-shadow: none !important;
+      border-color: inherit !important;
+    }
+
+    button:hover,
+    .card-content a:hover,
+    .footer-link:hover,
+    .footer-mailto:hover,
+    nav a:hover {
+      background: inherit !important;
+      color: inherit !important;
+      transform: none !important;
+    }
+
+    .filter-button:hover {
+      background-color: var(--color_3);
+      transform: none;
+    }
+
+    nav a.fading {
+      animation: none !important;
+    }
+  }
 }
 
 @media (max-width: 768px) {
@@ -607,7 +634,6 @@ nav a.fading {
   .canvas {
     padding: 10rem 0 5rem 0;
     overflow: visible;
-
   }
 
   .mobile-title {
