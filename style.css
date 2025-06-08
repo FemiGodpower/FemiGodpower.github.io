@@ -593,32 +593,32 @@ nav a.fading {
   .background_logo {
     margin-top: 15rem;
   }
-  @media (max-width: 1000px) {
-    /* Disable card hover effects */
-    .card:hover {
-      transform: none !important;
-      box-shadow: none !important;
-      border-color: inherit !important;
-    }
+  .card:hover {
+    transform: none !important;
+    box-shadow: none !important;
+    border-color: var(--color_3) !important;
+  }
 
-    button:hover,
-    .card-content a:hover,
-    .footer-link:hover,
-    .footer-mailto:hover,
-    nav a:hover {
-      background: inherit !important;
-      color: inherit !important;
-      transform: none !important;
-    }
+  /* Disable link and button hover effects */
+  button:hover,
+  .card-content a:hover,
+  .footer-link:hover,
+  .footer-mailto:hover,
+  nav a:hover {
+    background-color: var(--color_3) !important;
+    color: var(--bg) !important;
+    transform: none !important;
+  }
 
-    .filter-button:hover {
-      background-color: var(--color_3);
-      transform: none;
-    }
+  /* Filter button hover fix */
+  .filter-button:hover {
+    background-color: var(--color_3) !important;
+    transform: none !important;
+  }
 
-    nav a.fading {
-      animation: none !important;
-    }
+  /* Prevent nav flicker animation */
+  nav a.fading {
+    animation: none !important;
   }
 }
 
