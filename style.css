@@ -269,23 +269,14 @@ nav a:hover {
 }
 
 main {
-  max-width: 37.5rem;
+  width: 40rem;
+  max-width: 90vw;
   margin: 8.75rem auto 2.5rem;
-  padding: 1rem;
+  padding: 2rem;
   background: var(--bg);
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  animation: floatContact 6s ease-in-out infinite;
-}
-
-@keyframes floatContact {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-5px);
-  }
+  position: relative;	
 }
 
 .contact__h1 {
@@ -298,7 +289,7 @@ main {
 .email {
   text-align: center;
   font-weight: bold;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 
 .email a {
@@ -496,6 +487,7 @@ nav a.fading {
   position: absolute;
   width: 100%;
   margin-top: -5rem;
+  z-index: 0;
 }
 
 .background_logo svg {
@@ -547,6 +539,7 @@ nav a.fading {
 
 .footer-rights {
   display: flex;
+  flex-basis: 25%;
   flex-direction: column;
   align-items: flex-end;
 }
@@ -577,10 +570,33 @@ nav a.fading {
 }
 
 .logo {
-  width: 6rem;
+  flex-basis: 25%;
 }
 .logo svg {
   fill: var(--bg);
+  width: 6rem;
+}
+
+/* Email language settings */
+
+.language_p{
+  margin-top: 2rem;
+}
+
+.language_p > p {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.language_p a{
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.language_p a:hover {
+  color: var(--text);
+  text-decoration: underline;
 }
 
 @media (max-width: 1440px) {
@@ -590,49 +606,22 @@ nav a.fading {
 }
 
 @media (max-width: 1000px) {
-  .background_logo {
-    margin-top: 15rem;
-  }
-  .card:hover {
-    transform: none !important;
-    box-shadow: none !important;
-    border-color: var(--color_3) !important;
-  }
-
-  /* Disable link and button hover effects */
-  button:hover,
-  .card-content a:hover,
-  .footer-link:hover,
-  .footer-mailto:hover,
-  nav a:hover {
-    background-color: var(--color_3) !important;
-    color: var(--bg) !important;
-    transform: none !important;
-  }
-
-  /* Filter button hover fix */
-  .filter-button:hover {
-    background-color: var(--color_3) !important;
-    transform: none !important;
-  }
-
-  /* Prevent nav flicker animation */
-  nav a.fading {
-    animation: none !important;
-  }
-}
-
-@media (max-width: 768px) {
   html,
   body {
     overflow: scroll;
+    overflow-x: hidden;
   }
+
+  .background_logo {
+    margin-top: 15rem;
+  }
+
   nav {
     display: none;
   }
 
   .canvas {
-    padding: 10rem 0 5rem 0;
+    padding: 1rem 0 5rem 0;
     overflow: visible;
   }
 
@@ -667,6 +656,9 @@ nav a.fading {
     flex-wrap: nowrap;
     pointer-events: none;
     transition: opacity 0.5s ease-out;
+    position: static;
+    transform: translate(0, 0);
+    margin-top: 3rem;
   }
 
   .center-text span {
@@ -733,7 +725,7 @@ nav a.fading {
   #contact main {
     width: 90vw;
     max-width: 90vw;
-    margin: 12rem auto;
+    margin: 9rem auto;
     padding: 1rem;
     box-sizing: border-box;
   }
@@ -764,12 +756,42 @@ nav a.fading {
     text-align: center;
   }
 
-  .logo {
-    margin-bottom: 1rem;
-  }
-
   .fade-out {
     opacity: 0;
     transition: opacity 0.5s ease-out;
+  }
+  .card:hover {
+    transform: none !important;
+    box-shadow: none !important;
+    border-color: var(--color_3) !important;
+  }
+
+  /* Disable link and button hover effects */
+  button:hover,
+  .card-content a:hover,
+  .footer-link:hover,
+  .footer-mailto:hover,
+  nav a:hover {
+    background-color: var(--color_3) !important;
+    color: var(--bg) !important;
+    transform: none !important;
+  }
+
+  /* Filter button hover fix */
+  .filter-button:hover {
+    background-color: var(--color_3) !important;
+    transform: none !important;
+  }
+
+  /* Prevent nav flicker animation */
+  nav a.fading {
+    animation: none !important;
+  }
+
+  .form-buttons {
+    flex-direction: column;
+  }
+  .form-buttons button {
+    width: 100%;
   }
 }
