@@ -3,18 +3,41 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Terms of Service - GP Creations by Femi Godpower" />
+    <meta
+      name="description"
+      content="Terms of Service - GP Creations by Femi Godpower"
+    />
     <title>Terms of Service | GP Creations</title>
 
     <link rel="stylesheet" href="reset.css" />
     <link rel="stylesheet" href="style.css" />
-    <script src="https://kit.fontawesome.com/1debcff262.js" crossorigin="anonymous"></script>
+    <script
+      src="https://kit.fontawesome.com/1debcff262.js"
+      crossorigin="anonymous"
+    ></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
-    <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="favicons/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="favicons/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="favicons/favicon-16x16.png"
+    />
     <link rel="manifest" href="favicons/site.webmanifest" />
 
     <style>
@@ -22,7 +45,7 @@
         font-family: "Roboto", sans-serif;
         margin: 0;
         padding-bottom: 12rem;
-        background-image: url('http://www.gpcreations.be/images/logo_symbols_background.svg');
+        background-image: url("http://www.gpcreations.be/images/logo_symbols_background.svg");
         background-size: cover;
         background-repeat: no-repeat;
         background-position: 1% -10%;
@@ -61,22 +84,23 @@
         padding-left: 1.5rem;
       }
 
-      .slide-footer {
-        background-color: #0e3957;
-        color: white;
-        text-align: center;
-        padding: 2rem 1rem;
-        position: fixed;
-        bottom: 0;
-        left: 0;
+      .footer {
         width: 100%;
-        z-index: 10;
-        transform: translateY(10%);
+        background-color: #0e3957;
+        color: #f6f6f6;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 1.2rem;
+        padding: 1rem;
+        flex-wrap: wrap;
+        position: absolute;
+        bottom: 0;
       }
 
-      .slide-footer p,
-      .slide-footer a {
-        color: white;
+      .footer p,
+      .footer a {
+        color: #f6f6f6;
         text-decoration: none;
         font-size: 0.9rem;
       }
@@ -85,8 +109,20 @@
         color: #bf947a;
       }
 
-      .logo{
+      .logo {
         display: flex;
+      }
+
+      @media (max-width: 1000px) {
+        .footer-contact,
+        .footer-rights {
+          align-items: center;
+          text-align: center;
+        }
+
+        .footer-links-container {
+          text-align: center;
+        }
       }
     </style>
   </head>
@@ -108,16 +144,27 @@
       <p>Using our website means you agree to the following:</p>
       <ul>
         <li>Use the site respectfully and lawfully.</li>
-        <li>All content belongs to Godpower Creations unless stated otherwise.</li>
+        <li>
+          All content belongs to Godpower Creations unless stated otherwise.
+        </li>
         <li>Do not publish or transmit harmful or abusive content.</li>
-        <li>We are not responsible for indirect or accidental damages from using the site.</li>
-        <li>We can change these terms at any time, and using the site means you accept the changes.</li>
-        <li>The laws of Belgium apply to these terms, no matter where you’re located.</li>
+        <li>
+          We are not responsible for indirect or accidental damages from using
+          the site.
+        </li>
+        <li>
+          We can change these terms at any time, and using the site means you
+          accept the changes.
+        </li>
+        <li>
+          The laws of Belgium apply to these terms, no matter where you’re
+          located.
+        </li>
       </ul>
       <p>If you don’t agree with these terms, please don’t use the site.</p>
     </main>
 
-        <div class="slide-footer" id="slideFooter">
+    <div class="footer">
       <div class="logo">
         <svg
           id="Layer_1"
@@ -228,7 +275,9 @@
         <div class="footer-links-container">
           <a class="footer-link" href="privacy-policy.html">Privacy Policy</a>
           <span> | </span>
-          <a class="footer-link" href="terms-of-service.html">Terms of Service</a>
+          <a class="footer-link" href="terms-of-service.html"
+            >Terms of Service</a
+          >
         </div>
       </div>
     </div>

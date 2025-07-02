@@ -502,7 +502,7 @@ nav a.fading {
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color: var(--color_3);
+  background-color: var(--accent);
   color: var(--bg);
   display: flex;
   align-items: center;
